@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<body>
+    <header>
+        <div class="px-3 py-2 text-bg-dark border-bottom">
+            <div class="container-fluid">
+                <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    
+                    <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-box2-fill" viewBox="0 0 16 16">
+                            <path d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 0 0 0-.8-.4zM15 4.667V5H1v-.333L1.5 4h6V1h1v3h6z"/>
+                        </svg>
+                        <h1 class="ms-2 d-none d-md-block" style="font-size: 1.5rem;">Estimate & Repair</h1>
+                    </a>
+
+                    <div class="d-flex align-items-center">
+                        <button type="button" class="btn btn-primary btn-sm btn-lg ms-auto me-2" 
+                            th:if="${!isLoggedIn}" 
+                            onclick="window.location.href='/info/login'">LOGIN</button>
+                    
+                        <form th:action="@{/api/auth/logout}" method="POST" th:if="${isLoggedIn}">
+                            <button type="submit" class="btn btn-danger btn-sm btn-lg ms-auto me-2">LOGOUT</button>
+                        </form>
+                        
+
+                        <form th:action="@{/api/auth/logout}" method="POST" th:if="${!isLoggedIn}">
+                            <button type="button" class="btn btn-primary btn-sm btn-lg ms-auto" onclick="window.location.href='/info/register'">REGISTER</button>
+                        </form>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+</html>

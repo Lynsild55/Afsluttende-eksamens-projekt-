@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:replace="~{fragments/head :: head(pageTitle=${pageTitle})}"></header> <!-- Head for CSS and JS links -->
+    <div th:replace="~{fragments/header :: header}"></div> <!-- Header -->
+
+    <br>
+
+    <form th:action="@{/api/auth/register}" th:object="${registerDTO}" method="POST"
+      class="container mt-5 p-4 bg-light rounded shadow-lg" style="max-width: 400px;">
+    <h1 class="h4 mb-3 text-center fw-bold text-secondary">Register</h1>
+
+    <!-- Username Field with Error Handling -->
+    <div class="form-floating mb-3">
+        <input type="text" th:field="*{username}" class="form-control border-primary" id="floatingInput" placeholder="Username" required>
+        <label for="floatingInput">Username</label>
+        <div th:if="${#fields.hasErrors('username')}" class="text-danger">
+            <p th:errors="*{username}"></p>
+        </div>
+    </div>
+
+    <!-- Password Field with Error Handling -->
+    <div class="form-floating mb-3">
+        <input type="password" th:field="*{password}" class="form-control border-primary" id="floatingPassword" placeholder="Password" required>
+        <label for="floatingPassword">Password</label>
+        <div th:if="${#fields.hasErrors('password')}" class="text-danger">
+            <p th:errors="*{password}"></p>
+        </div>
+    </div>
+
+    <button class="btn btn-primary w-100 py-2 shadow-sm" type="submit">Submit</button>
+
+    <!-- Display General Error Message -->
+    <div th:if="${error}" class="text-danger mt-3">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Display Success Message -->
+    <div th:if="${message}" class="text-success mt-3">
+        <p th:text="${message}"></p>
+    </div>
+</form>
+
+
+
+    <!-- Include the footer fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

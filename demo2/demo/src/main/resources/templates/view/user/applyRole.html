@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+</head>
+<body>
+<header th:replace="~{fragments/head :: head}"></header>
+<div class="container">
+    <h1>Register</h1>
+    <form action="#" th:action="@{/user/submit}" method="post">
+        <label for="role">Select Role:</label>
+        <select id="role" name="role" required>
+            <option th:each="role : ${roles}"
+                    th:value="${role.name}"
+                    th:text="${role.name}">Role Name</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

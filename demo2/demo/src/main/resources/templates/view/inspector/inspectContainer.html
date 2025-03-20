@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Container Check</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Include header fragment -->
+    <header th:replace="~{fragments/head :: head}"></header> <!--head for css and js links-->
+    <div th:replace="~{fragments/header :: header}"></div> <!--header -->
+
+    <div class="container mt-4">
+        <div class="text-center mb-4">
+            <!-- Progress Section -->
+            <h1 class="mb-3" th:text="'Check ' + (${partIndex + 1}) + ' of ' + ${totalParts}"></h1>
+            <progress th:value="${partIndex + 1}" th:max="${totalParts}" class="w-100"></progress>
+        </div>
+
+        <!-- Title for the Current Check -->
+        <div class="text-center mb-4">
+            <h2 class="text-primary" th:text="'Check ' + ${currentPart} + ' of Container'"></h2>
+        </div>
+
+        <!-- Form Section -->
+        <div class="card p-4 mx-auto" style="max-width: 600px;">
+            <form th:action="@{/inspect/{containerId}/{partIndex}/{reportId}(containerId=${id}, partIndex=${partIndex + 1}, reportId=${reportId})}" 
+                  method="post" enctype="multipart/form-data">
+                <!-- Condition Dropdown -->
+                <div class="mb-3">
+                    <label for="condition" class="form-label fw-bold">Condition:</label>
+                    <select id="condition" name="condition" class="form-select">
+                        <option value="Good">Good</option>
+                        <option value="Minor Damage">Minor Damage</option>
+                        <option value="Badly Damaged">Badly Damaged</option>
+                    </select>
+                </div>
+                <!-- Note Section -->
+                <div class="mb-3">
+                    <label for="note" class="form-label fw-bold">Note:</label>
+                    <textarea id="note" name="note" class="form-control" rows="3"></textarea>
+                </div>
+                <!-- Photo Upload Section -->
+                <div class="mb-3">
+                    <label for="photo" class="form-label fw-bold">Upload Photo:</label>
+                    <input type="file" id="photo" name="photo" class="form-control">
+                </div>
+                <!-- Continue Button -->
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Continue &raquo;</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include footer fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

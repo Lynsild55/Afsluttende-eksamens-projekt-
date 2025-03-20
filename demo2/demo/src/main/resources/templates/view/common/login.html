@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:replace="~{fragments/head :: head(pageTitle=${pageTitle})}"></header> <!-- Head for CSS and JS links -->
+    <div th:replace="~{fragments/header :: header}"></div> <!-- Header -->
+
+    <br>
+
+    <form th:action="@{/api/auth/login}" th:object="${loginDto}" method="POST" 
+      class="container mt-5 p-4 bg-light rounded shadow-lg" style="max-width: 400px;">
+    <div class="d-flex justify-content-center mb-4">
+    </div>
+    <h1 class="h4 mb-3 text-center fw-bold text-secondary">Sign In</h1>
+
+    <div class="form-floating mb-3">
+        <input type="text" th:field="*{username}" class="form-control border-primary" id="floatingInput" placeholder="Username" required>
+        <label for="floatingInput">Username</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="password" th:field="*{password}" class="form-control border-primary" id="floatingPassword" placeholder="Password" required>
+        <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="form-check text-start mb-3">
+        <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Remember me
+        </label>
+    </div>
+
+    <button class="btn btn-primary w-100 py-2 shadow-sm" type="submit">Sign in</button>
+    
+    <!-- Display error message if login fails -->
+    <div th:if="${error}" class="text-danger mt-3">
+        <p th:text="${error}"></p>
+    </div>
+    
+    <div th:if="${message}" class="alert alert-success mt-3" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+
+</form>
+
+
+    <!-- Include the footer fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

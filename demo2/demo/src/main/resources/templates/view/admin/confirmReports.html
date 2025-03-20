@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:replace="~{fragments/head :: head}"></header> <!-- Head for CSS and JS links -->
+    <div th:replace="~{fragments/header :: header}"></div> <!-- Header -->
+
+    <div class="container">
+        <table class="table table-bordered table-hover table-striped mt-3 align-middle">
+            <br>
+            <h1>Unpaid Reports</h1>
+
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Inspector</th>
+                    <th scope="col">Container id</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">dato</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="report : ${reports}">
+                    <td th:text="${report.reportId}"></td>
+                    <td th:text="${report.inspector.username}"></td>
+                    <td th:text="${report.container.containerId}"></td>
+                    <td th:text="${report.status}"></td>
+                    <td th:text="${report.date}"></td>
+                    <td>
+                        <a class="btn btn-outline-info py-1 px-2 text-decoration-none border"
+                            th:href="@{/admin/details/{id}(id=${report.reportId})}">
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include the footer fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:replace="~{fragments/head :: head}"></header> <!-- Head for CSS and JS links -->
+    <div th:replace="~{fragments/header :: header}"></div> <!-- Header -->
+
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-header bg-dark text-white">
+                <h2>Report Details</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Report ID: <span th:text="${report.reportId}"></span></h5>
+                <p class="card-text"><strong>Date Created:</strong> <span th:text="${report.date}"></span></p>
+                <p class="card-text"><strong>Status:</strong> <span th:text="${report.status}"></span></p>
+
+                <p class="card-text"><strong>Container ID:</strong> <span th:text="${report.container.containerId}"></span></p>
+                <p class="card-text"><strong>Inspector:</strong> <span th:text="${report.inspector.username}"></span></p>
+
+                <p class="card-text"><strong>Damaged Items:</strong></p>
+                <ul>
+                    <li th:each="damagedItem : ${report.damagedItems}">
+                        <p><strong>Item:</strong> <span th:text="${damagedItem.containerPart.name}"></span></p>
+                        <p><strong>Note:</strong> <span th:text="${damagedItem.note}"></span></p>
+                        <p><strong>Condition:</strong> <span th:text="${damagedItem.condition}"></span></p>
+                    </li>
+                </ul>
+
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-success me-2" th:href="@{/report/accept/{id}(id=${report.reportId})}">Accept</a>
+                    <a class="btn btn-danger" th:href="@{/report/decline/{id}(id=${report.reportId})}">Decline</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the footer fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

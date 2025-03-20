@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:replace="~{fragments/head :: head}"></header> <!--head for css and js links -->
+    <div th:replace="~{fragments/header :: header}"></div> <!--header -->
+
+    <div class="container">
+        <table class="table table-bordered table-hover table-striped mt-3 align-middle">
+            <br>
+            <h1>Operations</h1>
+
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Serial tag</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Length</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="container : ${containers}">
+                    <td th:text="${container.containerId}"></td>
+                    <td th:text="${container.serialTag}"></td>
+                    <td th:text="${container.companyName != null ? container.companyName : 'No Company'}"></td>
+                    <td th:text="${container.length}"></td>
+                    <td th:text="${container.type}"></td>
+                    <td th:text="${container.weight}"></td>
+                    <td th:text="${container.status}"></td>
+                    <td>
+                        <a class="btn btn-outline-info py-1 px-2 text-decoration-none border"
+                            th:href="@{/inspect/container/{id}/{partIndex}/{reportId}(id=${container.containerId}, partIndex=${0}, reportId=${0})}">
+                            Inspect
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include the footer fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

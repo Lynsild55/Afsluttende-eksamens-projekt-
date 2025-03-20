@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:replace="~{fragments/head :: head(pageTitle=${pageTitle})}"></header> <!-- Head for CSS and JS links -->
+    <div th:replace="~{fragments/header :: header}"></div> <!-- Header -->
+
+    <div class="container d-flex flex-column align-items-center mt-5">
+        <div class="w-100 d-flex flex-column align-items-center gap-3">
+            
+            
+            
+            <a th:if="${isUser}" href="/user/roles" class="btn w-50 text-center py-3 rounded-box bg-secondary text-white">
+                Apply for role
+            </a>
+            <a th:if="${isInspector}" href="#" class="btn w-50 text-center py-3 rounded-box bg-secondary text-white">
+                Check container
+            </a>
+            <a th:if="${isConOwner}" href="#" class="btn w-50 text-center py-3 rounded-box bg-secondary text-white">
+                Owned containers
+            </a>
+            <a th:if="${isMechanic}" href="#" class="btn w-50 text-center py-3 rounded-box bg-secondary text-white">
+                Repair overview
+            </a>
+            <a th:if="${isAdmin || isInspector}" href="/inspect/overview" class="btn w-50 text-center py-3 rounded-box bg-secondary text-white">
+                Container overview
+            </a>
+            <a th:if="${isModerator}" href="#" class="btn w-50 text-center py-3 rounded-box bg-secondary text-white">
+                Users
+            </a>
+            <a th:if="${isAdmin}" href="/admin/confirm" class="btn w-50 text-center py-3 rounded-box bg-secondary text-white">
+                Confirm reports
+            </a>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
